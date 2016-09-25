@@ -1,23 +1,24 @@
 /** @jsx plastiq.jsx */
 var plastiq = require('plastiq');
 
-var loading = false;
-
 function setName(model) {
-  loading = true;
+  model.loading = true;
 
   return fetch('/ajax').then(res => res.json()).then(json => {
-    loading = false;
+    model.loading = false;
     model.name = json.name;
+  }).catch(e => {
+    model.loading = false;
+    model.name = error.message;
   });
 }
 
 function render(model) {
-  return loading
+  return model.loading
   ?
     <h1>loading...</h1>
   :
     <h1 onclick={() => setName(model)}>{ model.name }</h1>
 }
 
-plastiq.append(document.body, render, {name: 'hello'});
+plastiq.append(document.body, render, {name: 'hello', loading: false});

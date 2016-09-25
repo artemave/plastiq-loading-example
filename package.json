@@ -1,17 +1,21 @@
 {
   "scripts": {
-    "plastiq-start": "./node_modules/.bin/browserify ./plastiq/browser.jsx -t [ babelify --presets [ es2015 react ] ] -o ./plastiq/bundle.js && node ./app.js",
-    "plastiq-watch": "./node_modules/.bin/watchify ./plastiq/browser.jsx -t [ babelify --presets [ es2015 react ] ] -o ./plastiq/bundle.js -v"
+    "install": "elm-package install",
+    "start": "./node_modules/.bin/browserify ./plastiq/browser.jsx -t [ babelify --presets [ es2015 react ] ] -o ./plastiq/bundle.js && elm make ./elm/Main.elm --output=./elm/compiled.js && node ./app.js",
+    "plastiq-watch": "./node_modules/.bin/watchify ./plastiq/browser.jsx -t [ babelify --presets [ es2015 react ] ] -o ./plastiq/bundle.js -v",
+    "elm-watch": "chokidar '**/*.elm' -c 'elm make ./elm/Main.elm --output=./elm/compiled.js' --initial"
   },
   "dependencies": {
-    "express": "4.13.4",
-    "browserify": "13.0.0",
     "babel-preset-es2015": "6.5.0",
     "babel-preset-react": "6.5.0",
     "babelify": "7.2.0",
+    "browserify": "13.0.0",
+    "elm": "^0.17.1",
+    "express": "4.13.4",
     "plastiq": "1.30.1"
   },
   "devDependencies": {
+    "chokidar-cli": "^1.2.0",
     "watchify": "^3.7.0"
   }
 }
