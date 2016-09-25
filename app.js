@@ -3,8 +3,8 @@ const express = require('express');
 var app = express();
 var n = 1;
 
-app.get('/bundle.js', (req, res) => {
-  res.sendFile(__dirname + '/bundle.js');
+app.get('/plastiq/bundle.js', (req, res) => {
+  res.sendFile(__dirname + '/plastiq/bundle.js');
 });
 
 app.get('/ajax', (req, res) => {
@@ -13,8 +13,8 @@ app.get('/ajax', (req, res) => {
   }, 1000);
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+app.get('/plastiq*', (req, res) => {
+  res.sendFile(__dirname + '/plastiq/index.html');
 });
 
 var port = process.env.PORT || 4322;

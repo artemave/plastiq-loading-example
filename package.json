@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "start": "./node_modules/.bin/browserify ./browser.jsx -t [ babelify --presets [ es2015 react ] ] -o bundle.js && node ./app.js",
-    "watch": "./node_modules/.bin/watchify ./browser.jsx -t [ babelify --presets [ es2015 react ] ] -o bundle.js -v"
+    "plastiq-start": "./node_modules/.bin/browserify ./plastiq/browser.jsx -t [ babelify --presets [ es2015 react ] ] -o ./plastiq/bundle.js && node ./app.js",
+    "plastiq-watch": "./node_modules/.bin/watchify ./plastiq/browser.jsx -t [ babelify --presets [ es2015 react ] ] -o ./plastiq/bundle.js -v"
   },
   "dependencies": {
     "express": "4.13.4",
