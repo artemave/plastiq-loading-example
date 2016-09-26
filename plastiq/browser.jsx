@@ -15,10 +15,13 @@ function setName(model) {
 
 function render(model) {
   return model.loading
-  ?
-    <h1>loading...</h1>
-  :
-    <h1 onclick={() => setName(model)}>{ model.name }</h1>
+    ?
+      <h1>loading...</h1>
+    :
+      <div>
+        <h1>{ model.name }</h1>
+        <button onclick={() => setName(model)}>Update</button>
+      </div>
 }
 
 plastiq.append(document.body, render, {name: 'hello', loading: false});

@@ -1,4 +1,4 @@
-import Html exposing (Html, h1, text)
+import Html exposing (Html, h1, button, div, text)
 import Html.App as App
 import Html.Events exposing (onClick)
 import Http
@@ -43,7 +43,10 @@ view model =
   if model.loading then
     h1 [] [ text "Loading..." ]
   else
-    h1 [ onClick Fetch ] [ text model.name ]
+    div [] [
+      h1 [] [ text model.name ],
+      button [ onClick Fetch ] [ text "Update" ]
+    ]
 
 main : Program Never
 main =

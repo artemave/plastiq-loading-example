@@ -1,8 +1,12 @@
 {
   "scripts": {
     "install": "elm-package install",
-    "start": "./node_modules/.bin/browserify ./plastiq/browser.jsx -t [ babelify --presets [ es2015 react ] ] -o ./plastiq/bundle.js && elm make ./elm/Main.elm --output=./elm/compiled.js && node ./app.js",
-    "plastiq-watch": "./node_modules/.bin/watchify ./plastiq/browser.jsx -t [ babelify --presets [ es2015 react ] ] -o ./plastiq/bundle.js -v",
+    "start": "npm run plastiq-compile && npm run elm-compile && node ./app.js",
+
+    "plastiq-compile": "browserify ./plastiq/browser.jsx --debug -t [ babelify --presets [ es2015 react ] ] | exorcist ./plastiq/bundle.max.js.map > ./plastiq/bundle.max.js && uglifyjs ./plastiq/bundle.max.js --in-source-map ./plastiq/bundle.max.js.map --source-map ./plastiq/bundle.js.map --source-map-url bundle.js.map -o ./plastiq/bundle.js",
+    "plastiq-watch": "watchify ./plastiq/browser.jsx -t [ babelify --presets [ es2015 react ] ] -o ./plastiq/bundle.js -v",
+
+    "elm-compile": "elm make ./elm/Main.elm --output=./elm/compiled.js && uglifyjs --overwrite -o ./elm/compiled.js ./elm/compiled.js",
     "elm-watch": "chokidar '**/*.elm' -c 'elm make ./elm/Main.elm --output=./elm/compiled.js' --initial"
   },
   "dependencies": {
@@ -10,12 +14,15 @@
     "babel-preset-react": "6.5.0",
     "babelify": "7.2.0",
     "browserify": "13.0.0",
+    "compression": "^1.6.2",
     "elm": "^0.17.1",
     "express": "4.13.4",
     "plastiq": "1.30.1"
   },
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
+    "exorcist": "^0.4.0",
+    "uglifyjs": "^2.4.10",
     "watchify": "^3.7.0"
   }
 }
